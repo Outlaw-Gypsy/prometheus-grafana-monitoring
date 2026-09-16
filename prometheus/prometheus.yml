@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 15s
+
+rule_files:
+  - "/usr/local/etc/alert.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+      - targets:
+        - localhost:9093
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+    - targets: ["localhost:9090"]
+
+  - job_name: "EC2_instance_job"
+    static_configs:
+    - targets: ["13.53.134.96:9100"]
+
+  - job_name: "node_exporter"
+    static_configs:
+    - targets: ["localhost:9999"]
